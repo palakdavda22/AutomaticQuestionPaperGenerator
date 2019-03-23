@@ -1,3 +1,12 @@
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -5,6 +14,7 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.JOptionPane;
+
 import net.proteanit.sql.DbUtils;
 
 /*
@@ -106,6 +116,7 @@ public class paper extends javax.swing.JFrame {
         jbtnGenerate = new javax.swing.JButton();
         jbtnReload = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jbtnChange = new javax.swing.JButton();
         jPanelChoice10 = new javax.swing.JPanel();
         jRadioBtn10_1 = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
@@ -700,6 +711,13 @@ public class paper extends javax.swing.JFrame {
             }
         });
 
+        jbtnChange.setText("Change");
+        jbtnChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnChangeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelQuestionViewLayout = new javax.swing.GroupLayout(jPanelQuestionView);
         jPanelQuestionView.setLayout(jPanelQuestionViewLayout);
         jPanelQuestionViewLayout.setHorizontalGroup(
@@ -708,17 +726,25 @@ public class paper extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3))
             .addGroup(jPanelQuestionViewLayout.createSequentialGroup()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(153, 153, 153)
-                .addComponent(jbtnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
-                .addComponent(jbtnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGroup(jPanelQuestionViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelQuestionViewLayout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(153, 153, 153)
+                        .addComponent(jbtnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(jbtnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 112, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelQuestionViewLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnChange)))
+                .addContainerGap())
         );
         jPanelQuestionViewLayout.setVerticalGroup(
             jPanelQuestionViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelQuestionViewLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(10, 10, 10)
+                .addComponent(jbtnChange)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelQuestionViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelQuestionViewLayout.createSequentialGroup()
@@ -812,7 +838,7 @@ public class paper extends javax.swing.JFrame {
                             .addGroup(jPanelChoice10Layout.createSequentialGroup()
                                 .addGap(149, 149, 149)
                                 .addComponent(jLabel14)
-                                .addContainerGap(112, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanelChoice10Layout.createSequentialGroup()
                                 .addGap(176, 176, 176)
                                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -925,7 +951,7 @@ public class paper extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelChoice15Layout.createSequentialGroup()
                         .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel17)
                         .addGap(88, 88, 88))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChoice15Layout.createSequentialGroup()
@@ -982,7 +1008,7 @@ public class paper extends javax.swing.JFrame {
                                 .addGap(9, 9, 9)))
                         .addGap(17, 17, 17)
                         .addComponent(jRadioBtn15_4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChoice15Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioBtn15_3)
@@ -1085,7 +1111,7 @@ public class paper extends javax.swing.JFrame {
                                 .addComponent(jLabel22)
                                 .addGap(208, 208, 208)
                                 .addComponent(jLabel23)))
-                        .addGap(0, 52, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanelChoice30Layout.createSequentialGroup()
                 .addGap(206, 206, 206)
@@ -1108,7 +1134,7 @@ public class paper extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(107, 107, 107)
-                .addGroup(jPanelChoice30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelChoice30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
                     .addComponent(jLabel21))
                 .addGroup(jPanelChoice30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1202,7 +1228,7 @@ public class paper extends javax.swing.JFrame {
                         .addComponent(jLabel27))
                     .addGroup(jPanelChoice20Layout.createSequentialGroup()
                         .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel25)))
                 .addGap(86, 86, 86))
             .addGroup(jPanelChoice20Layout.createSequentialGroup()
@@ -1335,7 +1361,7 @@ public class paper extends javax.swing.JFrame {
                         .addGroup(jPanelChoice50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel31)
                             .addComponent(jLabel29))
-                        .addContainerGap(140, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanelChoice50Layout.createSequentialGroup()
                 .addGap(197, 197, 197)
                 .addComponent(jRadioBtn50_3)
@@ -1671,6 +1697,44 @@ public class paper extends javax.swing.JFrame {
        }catch(SQLException e){
            JOptionPane.showMessageDialog(null, "Problem i updating probabilty " + e);
        }
+       String file = JOptionPane.showInputDialog("Enter the file name(without extension)");
+       
+       Document document = new Document();
+       try{
+//           PdfWriter writer = new PdfWriter.getInstance();
+           PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file+".pdf"));
+           document.open();
+           Font font = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD);
+            Paragraph para = new Paragraph("Sardar Patel Institute of Technology", font);
+            para.setAlignment(Element.ALIGN_CENTER);
+            document.add(para);
+            Font font2 = new Font(Font.FontFamily.HELVETICA, 15, Font.UNDERLINE);
+            Paragraph para2 = new Paragraph("End Semester Exam", font2);
+            para2.setAlignment(Element.ALIGN_CENTER);
+            document.add(para2);
+            Font font3 = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+            Paragraph para4 = new Paragraph("Questions\n\n", font3);
+            para4.setAlignment(Element.ALIGN_CENTER);
+            document.add(para4);
+            int count = jTableQuestions.getRowCount();
+            for(int i = 0 ;  i< count ; i++){
+                String question = jTableQuestions.getModel().getValueAt(i,2).toString();
+                int marks = Integer.parseInt(jTableQuestions.getModel().getValueAt(i,3).toString());
+                Paragraph para3 = new Paragraph("Q"+(i+1)+" "+question+ "\t\t ("+marks+")");
+                para3.setAlignment(Element.ALIGN_CENTER);
+                document.add(para3);
+            }
+           document.close();
+       }
+       catch(DocumentException e){
+            JOptionPane.showMessageDialog(null, "Issue: " + e);
+           e.printStackTrace();
+       }catch (FileNotFoundException e){
+           e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Issue: " + e);
+       }
+       
+       
     }//GEN-LAST:event_jbtnGenerateActionPerformed
 
     private void jbtnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReloadActionPerformed
@@ -1874,6 +1938,28 @@ public class paper extends javax.swing.JFrame {
     private void jcbCustomSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCustomSelectionActionPerformed
         
     }//GEN-LAST:event_jcbCustomSelectionActionPerformed
+
+    private void jbtnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnChangeActionPerformed
+       try{
+           int row = jTableQuestions.getSelectedRow();
+           int marks = Integer.parseInt(jTableQuestions.getModel().getValueAt(row, 3)+"");
+           int diff = Integer.parseInt(jTableQuestions.getModel().getValueAt(row, 4)+"");
+           int question_id = Integer.parseInt(jTableQuestions.getModel().getValueAt(row, 0)+"");
+           System.out.println("Marks: "+marks+" Diff: "+diff+"question iD: "+question_id);
+           String sql = "Insert into relevantquestions Select * from questions where marks = " + marks + " and difficulty = "+ diff+ " and question_id not in (Select question_id from relevantquestions) order by probability asc, rand() limit 1 ";
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+            String sql1 = "Delete from relevantquestions where question_id = "+question_id;
+            ps = conn.prepareStatement(sql1);
+            ps.executeUpdate();
+            String sql2 = "select * from relevantquestions";
+            ps = conn.prepareStatement(sql2);
+            rs = ps.executeQuery();
+            jTableQuestions.setModel(DbUtils.resultSetToTableModel(rs));
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Issue: " + e);
+       }
+    }//GEN-LAST:event_jbtnChangeActionPerformed
     void clearFields(){
         jtxtChapterName.setText("");
         jtxtQuestions.setText("");
@@ -2130,6 +2216,7 @@ public class paper extends javax.swing.JFrame {
     private javax.swing.JButton jbtnAdd;
     private javax.swing.JButton jbtnAddQuestion;
     private javax.swing.JButton jbtnBack;
+    private javax.swing.JButton jbtnChange;
     private javax.swing.JButton jbtnGenerate;
     private javax.swing.JButton jbtnGeneratePaper;
     private javax.swing.ButtonGroup jbtnGroupMarks;
